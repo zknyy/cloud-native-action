@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  phpredisadmin:
+    image: erikdubbelboer/phpredisadmin
+    environment:
+      - ADMIN_USER=admin
+      - ADMIN_PASS=admin
+      - REDIS_1_HOST=redis
+      - REDIS_1_PORT=6379
+    links:
+      - redis
+    ports:
+      - "6380:80"
+
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - /home/demo/docker-stack/redis-data-dir/data:/data
+    ports:
+      - 6379:6379
+
